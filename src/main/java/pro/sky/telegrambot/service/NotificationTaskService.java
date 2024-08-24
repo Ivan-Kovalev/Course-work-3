@@ -8,6 +8,6 @@ public interface NotificationTaskService {
 
     void save(NotificationTask task);
 
-    NotificationTask getCurrentTask(LocalDateTime dateTime);
+    NotificationTask findNotificationTaskByDate();
 
 }

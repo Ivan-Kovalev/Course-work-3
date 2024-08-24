@@ -20,7 +20,7 @@ public class NotificationTaskPatternsAndConstant {
 
     public static final String BAD_REQUEST_TIME_FORMATTER = "Неверный формат даты и времени!\nОтправь корректный формат напоминания!";
 
-    public static final String WELCOME_MESSAGE = "Привет, я могу сделать для тебя напоминание!\nНапиши напоминание в формате: дд.мм.гггг чч:мм -текст напоминания-";
+    public static final String WELCOME_MESSAGE = "Привет, я могу сделать для тебя напоминание!\nНапиши напоминание в формате:\nдд.мм.гггг чч:мм -текст напоминания-";
 
     public static void sendMessage(TelegramBot telegramBot, Long chatId, String text) {
         SendMessage message = new SendMessage(chatId, text);

@@ -19,7 +19,7 @@ public class NotificationTaskScheduler {
 
     @Scheduled(cron = "0 0/1 * * * *")
     public void run() {
-        NotificationTask task = notificationTaskService.getCurrentTask(CURRENT_TIME_TO_MINUTES);
+        NotificationTask task = notificationTaskService.findNotificationTaskByDate();
         if (task != null) {
             SendMessage message = new SendMessage(task.getChatId(), "Ваше напоминание:\n" + task.getMessage());
             telegramBot.execute(message);

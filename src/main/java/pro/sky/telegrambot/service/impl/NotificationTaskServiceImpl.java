@@ -9,12 +9,13 @@ import pro.sky.telegrambot.service.NotificationTaskService;
 
 import java.time.LocalDateTime;
 
+import static pro.sky.telegrambot.utils.NotificationTaskPatternsAndConstant.CURRENT_TIME_TO_MINUTES;
+
 @Service
 @RequiredArgsConstructor
 public class NotificationTaskServiceImpl implements NotificationTaskService {
 
     private final NotificationTaskRepository notificationTaskRepository;
-    private final TelegramBot telegramBot;
 
 
     @Override
@@ -24,7 +25,7 @@ public class NotificationTaskServiceImpl implements NotificationTaskService {
     }
 
     @Override
-    public NotificationTask getCurrentTask(LocalDateTime dateTime) {
-        return notificationTaskRepository.findNotificationTaskByDate(dateTime);
+    public NotificationTask findNotificationTaskByDate() {
+        return notificationTaskRepository.findNotificationTaskByDate();
     }
 }
