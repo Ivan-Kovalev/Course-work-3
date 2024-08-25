@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface NotificationTaskRepository extends JpaRepository<NotificationTask, Long> {
 
-    @Query(value = "SELECT * FROM notification_task WHERE to_char(date, 'YYYY-MM-DD HH24:MI') = to_char(CURRENT_TIMESTAMP AT TIME ZONE INTERVAL '+03:00', 'YYYY-MM-DD HH24:MI')", nativeQuery = true)
-    List<NotificationTask> findNotificationTaskByDate();
+    @Query(value = "SELECT * FROM notification_task nt WHERE to_char(nt.date, 'YYYY-MM-DD HH24:MI') = to_char(cast(:dateTime as timestamp), 'YYYY-MM-DD HH24:MI')", nativeQuery = true)
+    List<NotificationTask> findNotificationTaskByDate(@Param("dateTime") LocalDateTime dateTime);
 }
