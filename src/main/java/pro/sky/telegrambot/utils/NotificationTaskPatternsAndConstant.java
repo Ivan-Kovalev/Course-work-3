@@ -14,7 +14,7 @@ public class NotificationTaskPatternsAndConstant {
 
     public static final Pattern PATTERN = Pattern.compile("(\\d{2}\\.\\d{2}\\.\\d{4}\\s\\d{2}:\\d{2})(\\s+)(.+)");
 
-//    public static final LocalDateTime CURRENT_TIME_TO_MINUTES = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
+    public static final LocalDateTime CURRENT_TIME_TO_MINUTES = LocalDateTime.now().truncatedTo(ChronoUnit.MINUTES);
 
     public static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm");
 

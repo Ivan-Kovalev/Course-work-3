@@ -19,12 +19,10 @@ public class NotificationTaskScheduler {
 
     @Scheduled(cron = "0 0/1 * * * *")
     public void run() {
-        List<NotificationTask> tasks = notificationTaskService.findNotificationTaskByDate();
-        if (!tasks.isEmpty()) {
-            for (NotificationTask task : tasks) {
-                SendMessage message = new SendMessage(task.getChatId(), "Ваше напоминание:\n" + task.getMessage());
-                telegramBot.execute(message);
-            }
+        NotificationTask task = notificationTaskService.findNotificationTaskByDate();
+        if (task != null) {
+            SendMessage message = new SendMessage(task.getChatId(), "Ваше напоминание:\n" + task.getMessage());
+            telegramBot.execute(message);
         }
     }
 }

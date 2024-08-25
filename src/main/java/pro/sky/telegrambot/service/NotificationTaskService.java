@@ -9,6 +9,6 @@ public interface NotificationTaskService {
 
     void save(NotificationTask task);
 
-    List<NotificationTask> findNotificationTaskByDate();
+    NotificationTask findNotificationTaskByDate();
 
 }

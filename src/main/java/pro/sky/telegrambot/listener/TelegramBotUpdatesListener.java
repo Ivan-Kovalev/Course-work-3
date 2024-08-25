@@ -7,13 +7,11 @@ import com.pengrad.telegrambot.model.Update;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import pro.sky.telegrambot.exceptions.BadTimeFormatterException;
 import pro.sky.telegrambot.model.NotificationTask;
 import pro.sky.telegrambot.service.NotificationTaskService;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -45,7 +43,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                 }
                 try {
                     addTask(message.chat().id(), message.text());
-                } catch (DateTimeParseException | BadTimeFormatterException exception) {
+                } catch (Exception exception) {
                     sendMessage(telegramBot, message.chat().id(), BAD_REQUEST_TIME_FORMATTER);
                 }
             }
@@ -59,18 +57,9 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         if (matcher.matches()) {
             String dateTimeStr = matcher.group(1);
             LocalDateTime date = LocalDateTime.parse(dateTimeStr, TIME_FORMATTER);
-            if (!isTimeValid(date)) {
-                throw new BadTimeFormatterException();
-            }
             String message = matcher.group(3);
             notificationTaskService.save(new NotificationTask(chatId, message, date));
             sendMessage(telegramBot, chatId, "Напоминание: " + message + ", добавлено!");
         }
-    }
-
-    private boolean isTimeValid(LocalDateTime dateTime) {
-        int hour = dateTime.getHour();
-        int minute = dateTime.getMinute();
-        return hour >= 0 && hour < 24 && minute >= 0 && minute < 60;
     }
 }
