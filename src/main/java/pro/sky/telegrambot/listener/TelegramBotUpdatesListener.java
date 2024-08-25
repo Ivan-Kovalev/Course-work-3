@@ -58,7 +58,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
 
         if (matcher.matches()) {
             String dateTimeStr = matcher.group(1);
-            LocalDateTime date = LocalDateTime.parse(dateTimeStr, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+            LocalDateTime date = LocalDateTime.parse(dateTimeStr, TIME_FORMATTER);
             if (!isTimeValid(date)) {
                 throw new BadTimeFormatterException();
             }

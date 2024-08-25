@@ -1,15 +1,14 @@
 package pro.sky.telegrambot.service.impl;
 
-import com.pengrad.telegrambot.TelegramBot;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import pro.sky.telegrambot.model.NotificationTask;
 import pro.sky.telegrambot.repository.NotificationTaskRepository;
 import pro.sky.telegrambot.service.NotificationTaskService;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
-import static pro.sky.telegrambot.utils.NotificationTaskPatternsAndConstant.CURRENT_TIME_TO_MINUTES;
+
 
 @Service
 @RequiredArgsConstructor
@@ -25,7 +24,7 @@ public class NotificationTaskServiceImpl implements NotificationTaskService {
     }
 
     @Override
-    public NotificationTask findNotificationTaskByDate() {
+    public List<NotificationTask> findNotificationTaskByDate() {
         return notificationTaskRepository.findNotificationTaskByDate();
     }
 }

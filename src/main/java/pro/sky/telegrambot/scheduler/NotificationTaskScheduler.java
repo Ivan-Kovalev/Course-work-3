@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import pro.sky.telegrambot.model.NotificationTask;
 import pro.sky.telegrambot.service.NotificationTaskService;
 
-import static pro.sky.telegrambot.utils.NotificationTaskPatternsAndConstant.CURRENT_TIME_TO_MINUTES;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Component
@@ -19,10 +19,12 @@ public class NotificationTaskScheduler {
 
     @Scheduled(cron = "0 0/1 * * * *")
     public void run() {
-        NotificationTask task = notificationTaskService.findNotificationTaskByDate();
-        if (task != null) {
-            SendMessage message = new SendMessage(task.getChatId(), "Ваше напоминание:\n" + task.getMessage());
-            telegramBot.execute(message);
+        List<NotificationTask> tasks = notificationTaskService.findNotificationTaskByDate();
+        if (!tasks.isEmpty()) {
+            for (NotificationTask task : tasks) {
+                SendMessage message = new SendMessage(task.getChatId(), "Ваше напоминание:\n" + task.getMessage());
+                telegramBot.execute(message);
+            }
         }
     }
 }
